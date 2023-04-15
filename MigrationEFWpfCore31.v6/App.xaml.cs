@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -19,25 +20,16 @@ namespace MigrationEFWpfCore31.v6
     /// Interaction logic for App.xaml
     /// </summary>
     public partial class App : Application
-    {       
-
-        //public static IHostBuilder CreateHostBuilder(string[] args) => Microsoft.Extensions.Hosting.Host
-        //        .CreateDefaultBuilder(args)
-        //        .ConfigureServices(
-        //            (hostContext, services) => services
-        //                .AddDatabase(hostContext.Configuration.GetSection("Database"))
-        //                .AddServices()
-        //                .AddViewModels()
-        //);
-
-
+    {   
         public static IHostBuilder CreateHostBuilder(string[] args) => Microsoft.Extensions.Hosting.Host
                 .CreateDefaultBuilder(args)
                 .ConfigureServices(
                     (hostContext, services) => services
                        .AddDbContext<ContextDBBookinist>(opt =>
-                       {                           
-                           opt.UseSqlServer(hostContext.Configuration.GetConnectionString("Database"));
+                       {
+                           string path = Directory.GetCurrentDirectory();
+                           opt.UseSqlServer(hostContext.Configuration.GetConnectionString("Database")
+                               .Replace("[DataDirectory]", path));
                        } 
                     )
         );

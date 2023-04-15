@@ -9,7 +9,7 @@ using MigrationEFWpfCore31.v6.DAL.Entities;
 namespace MigrationEFWpfCore31.v6.DAL.Migrations
 {
     [DbContext(typeof(ContextDBBookinist))]
-    [Migration("20230415130204_Initial")]
+    [Migration("20230415134447_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
